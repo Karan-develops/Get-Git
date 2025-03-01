@@ -68,7 +68,7 @@ export default function ProfilePage() {
   };
 
   return (
-    <div className="container mx-auto p-7">
+    <div className="container mx-auto p-7 min-h-screen">
       <h1 className="text-3xl font-bold text-center mb-8">
         GitHub Profile Stats
       </h1>
