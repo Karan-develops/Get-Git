@@ -2,8 +2,8 @@
 
 import type * as React from "react";
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { Home, Star, Gitlab, Swords, Flame } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Home, Star, Gitlab, Swords, Flame, Menu } from "lucide-react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import { ModeToggle } from "./ToggleTheme";
@@ -109,113 +109,114 @@ export function Navbar() {
       initial="initial"
       whileHover="hover"
     >
-      <motion.div
-        className={`absolute inset-0 bg-gradient-radial from-transparent ${
-          isDarkTheme
-            ? "via-blue-400/30 via-30% via-purple-400/30 via-60% via-red-400/30 via-90%"
-            : "via-blue-400/20 via-30% via-purple-400/20 via-60% via-red-400/20 via-90%"
-        } to-transparent rounded-3xl z-0 pointer-events-none`}
-        variants={navGlowVariants}
-      />
+      <motion.div variants={navGlowVariants} />
       <div className="max-w-7xl mx-auto flex items-center justify-between relative z-10">
         <Link href="/" className="text-2xl font-bold text-foreground">
           <span className="flex gap-2 ml-2 text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-orange-600">
             Get Git <Gitlab className="text-orange-500 mt-1" />
           </span>
         </Link>
-        <ul className="flex items-center gap-2">
-          {menuItems.map((item) => (
-            <motion.li key={item.label} className="relative">
-              <motion.div
-                className="block rounded-xl overflow-visible group relative"
-                style={{ perspective: "600px" }}
-                whileHover="hover"
-                initial="initial"
-              >
-                <motion.div
-                  className="absolute inset-0 z-0 pointer-events-none"
-                  variants={glowVariants}
-                  style={{
-                    background: item.gradient,
-                    opacity: 0,
-                    borderRadius: "16px",
-                  }}
-                />
-                <motion.div
-                  variants={itemVariants}
-                  transition={sharedTransition}
-                  style={{
-                    transformStyle: "preserve-3d",
-                    transformOrigin: "center bottom",
-                  }}
-                >
-                  <Link
-                    href={item.href}
-                    className="flex items-center gap-2 px-4 py-2 relative z-10 bg-transparent text-muted-foreground group-hover:text-foreground transition-colors rounded-xl"
-                  >
-                    <span
-                      className={`transition-colors duration-300 group-hover:${item.iconColor} text-foreground`}
-                    >
-                      {item.icon}
-                    </span>
-                    <span>{item.label}</span>
-                  </Link>
-                </motion.div>
-                <motion.div
-                  className="absolute inset-0 z-10"
-                  variants={backVariants}
-                  transition={sharedTransition}
-                  style={{
-                    transformStyle: "preserve-3d",
-                    transformOrigin: "center top",
-                    rotateX: 90,
-                  }}
-                >
-                  <Link
-                    href={item.href}
-                    className="flex items-center gap-2 px-4 py-2 bg-transparent text-muted-foreground group-hover:text-foreground transition-colors rounded-xl h-full w-full"
-                  >
-                    <span
-                      className={`transition-colors duration-300 group-hover:${item.iconColor} text-foreground`}
-                    >
-                      {item.icon}
-                    </span>
-                    <span>{item.label}</span>
-                  </Link>
-                </motion.div>
-              </motion.div>
-            </motion.li>
-          ))}
-          <ModeToggle />
-        </ul>
-      </div>
-      {/* Mobile menu */}
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          className="md:hidden"
-        >
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {menuItems.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                className={`block px-3 py-2 rounded-md text-base font-medium ${
-                  pathname === item.href
-                    ? "bg-primary/10 text-primary"
-                    : "text-foreground/60 hover:bg-accent hover:text-accent-foreground"
-                }`}
-                onClick={() => setIsOpen(false)}
-              >
-                {item.label}
-              </Link>
-            ))}
-            {mounted && <ModeToggle />}
+        <div className="flex items-center gap-2">
+          <div className="md:hidden">
+            <button onClick={() => setIsOpen(!isOpen)}>
+              <Menu className="h-6 w-6 text-foreground" />
+            </button>
           </div>
-        </motion.div>
-      )}
+          <ul className="hidden md:flex items-center gap-2">
+            {menuItems.map((item) => (
+              <motion.li key={item.label} className="relative">
+                <motion.div
+                  className="block rounded-xl overflow-visible group relative"
+                  style={{ perspective: "600px" }}
+                  whileHover="hover"
+                  initial="initial"
+                >
+                  <motion.div
+                    className="absolute inset-0 z-0 pointer-events-none"
+                    variants={glowVariants}
+                    style={{
+                      background: item.gradient,
+                      opacity: 0,
+                      borderRadius: "16px",
+                    }}
+                  />
+                  <motion.div
+                    variants={itemVariants}
+                    transition={sharedTransition}
+                    style={{
+                      transformStyle: "preserve-3d",
+                      transformOrigin: "center bottom",
+                    }}
+                  >
+                    <Link
+                      href={item.href}
+                      className="flex items-center gap-2 px-4 py-2 relative z-10 bg-transparent text-muted-foreground group-hover:text-foreground transition-colors rounded-xl"
+                    >
+                      <span
+                        className={`transition-colors duration-300 group-hover:${item.iconColor} text-foreground`}
+                      >
+                        {item.icon}
+                      </span>
+                      <span>{item.label}</span>
+                    </Link>
+                  </motion.div>
+                  <motion.div
+                    className="absolute inset-0 z-10"
+                    variants={backVariants}
+                    transition={sharedTransition}
+                    style={{
+                      transformStyle: "preserve-3d",
+                      transformOrigin: "center top",
+                      rotateX: 90,
+                    }}
+                  >
+                    <Link
+                      href={item.href}
+                      className="flex items-center gap-2 px-4 py-2 bg-transparent text-muted-foreground group-hover:text-foreground transition-colors rounded-xl h-full w-full"
+                    >
+                      <span
+                        className={`transition-colors duration-300 group-hover:${item.iconColor} text-foreground`}
+                      >
+                        {item.icon}
+                      </span>
+                      <span>{item.label}</span>
+                    </Link>
+                  </motion.div>
+                </motion.div>
+              </motion.li>
+            ))}
+            <ModeToggle />
+          </ul>
+        </div>
+      </div>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="md:hidden"
+          >
+            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+              {menuItems.map((item) => (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className={`block px-3 py-2 rounded-md text-base font-medium ${
+                    pathname === item.href
+                      ? "bg-primary/10 text-primary"
+                      : "text-foreground/60 hover:bg-accent hover:text-accent-foreground"
+                  }`}
+                  onClick={() => setIsOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              ))}
+              {mounted && <ModeToggle />}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.nav>
   );
 }
