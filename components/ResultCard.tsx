@@ -11,23 +11,6 @@ import Image from "next/image";
 import { Button } from "./ui/button";
 import Link from "next/link";
 
-interface GitHubUser {
-  login: string;
-  name: string;
-  avatar_url: string;
-  html_url: string;
-  public_repos: number;
-  followers: number;
-  following: number;
-  bio: string;
-}
-
-interface PlayerData {
-  user: GitHubUser;
-  score: number;
-  stars: number;
-}
-
 export function PlayerCard({
   playerData,
   isWinner,

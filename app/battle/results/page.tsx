@@ -8,28 +8,6 @@ import { Button } from "@/components/ui/button";
 import { PlayerCard } from "@/components/ResultCard";
 import CardSkeleton from "@/components/CardSkeleton";
 
-interface GitHubUser {
-  login: string;
-  name: string;
-  avatar_url: string;
-  html_url: string;
-  public_repos: number;
-  followers: number;
-  following: number;
-  bio: string;
-}
-
-interface GitHubRepo {
-  stargazers_count: number;
-  forks_count: number;
-}
-
-interface PlayerData {
-  user: GitHubUser;
-  score: number;
-  stars: number;
-}
-
 export default function ResultsPage() {
   const searchParams = useSearchParams();
   const player1Username = searchParams.get("player1");

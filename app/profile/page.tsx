@@ -23,23 +23,6 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 
-interface GitHubUser {
-  login: string;
-  name: string;
-  avatar_url: string;
-  html_url: string;
-  public_repos: number;
-  followers: number;
-  following: number;
-  bio: string;
-  location: string;
-}
-
-interface GitHubRepo {
-  stargazers_count: number;
-  forks_count: number;
-}
-
 export default function ProfilePage() {
   const [username, setUsername] = useState("");
   const [userData, setUserData] = useState<GitHubUser | null>(null);
