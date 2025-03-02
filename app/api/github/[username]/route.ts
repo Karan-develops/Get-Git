@@ -3,8 +3,9 @@ import { fetchGitHubData, fetchUserEvents } from "@/lib/github-api";
 
 export async function GET(
   request: Request,
-  { params }: { params: { username: string } }
+  { params: paramsPromise }: { params: Promise<{ username: string }> }
 ) {
+  const params = await paramsPromise;
   const username = params.username;
 
   try {
