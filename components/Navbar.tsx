@@ -3,7 +3,7 @@
 import type * as React from "react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Home, Star, Gitlab, Swords, Flame, Menu } from "lucide-react";
+import { Home, Star, Gitlab, Swords, Flame, Menu, Crown } from "lucide-react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import { ModeToggle } from "./ToggleTheme";
@@ -41,6 +41,14 @@ const menuItems: MenuItem[] = [
     gradient:
       "radial-gradient(circle, rgba(34,197,94,0.15) 0%, rgba(22,163,74,0.06) 50%, rgba(21,128,61,0) 100%)",
     iconColor: "text-green-500",
+  },
+  {
+    icon: <Crown className="h-5 w-5" />,
+    label: "Tournament",
+    href: "/tournament",
+    gradient:
+      "radial-gradient(circle, rgba(34,197,94,0.15) 0%, rgba(22,163,74,0.06) 50%, rgba(21,128,61,0) 100%)",
+    iconColor: "text-purple-500",
   },
   {
     icon: <Star className="h-5 w-5" />,
