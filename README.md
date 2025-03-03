@@ -4,7 +4,7 @@
 
 Get Git is an interactive web application that allows users to explore, compare, and have fun with GitHub profiles. Try Getting roasted by AI 😈 Built with Next.js, React, and powered by various APIs including GitHub and Google's Gemini AI, this project offers a unique way to engage with GitHub data.
 
-![banner](https://placeholder.svg?height=300&width=600)
+![banner](https://raw.githubusercontent.com/Karan-develops/Get-Git/refs/heads/main/App.png)
 
 ## Features
 
@@ -51,6 +51,5 @@ To run this project locally, follow these steps:
 
 - Open your browser and navigate to `http://localhost:3000`.
 - Explore the features and functionalities of the Get Git.
-
 
 --- **_Enjoy_** **😊** ---
