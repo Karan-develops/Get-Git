@@ -9,6 +9,7 @@ import {
   GitFork,
   Code,
   MapPinHouse,
+  Braces,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -97,7 +98,7 @@ export default function ProfilePage() {
             <CardHeader>
               <div className="flex items-center gap-4">
                 <Image
-                  src={userData.avatar_url || "/placeholder.svg"}
+                  src={userData.avatar_url || ""}
                   alt={`${userData.name}'s avatar`}
                   width={80}
                   height={80}
@@ -151,11 +152,17 @@ export default function ProfilePage() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <GithubIcon className="mr-2 h-4 w-4" />
+                  <GithubIcon className="h-4 w-4" />
                   View GitHub Profile
                 </Link>
               </Button>
             </CardFooter>
+            <Button variant={"outline"} className="w-auto mx-6">
+              <Link href={"/insights"} className="flex gap-2">
+                <Braces className="mt-0.5 h-4 w-4" />
+                See More Insights
+              </Link>
+            </Button>
           </Card>
         </motion.div>
       )}

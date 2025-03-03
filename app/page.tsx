@@ -1,12 +1,11 @@
-import { ModeToggle } from "@/components/ToggleTheme";
-import { Button } from "@/components/ui/button";
+import Hero from "@/components/Hero";
+import LightBeam from "@/components/LightBeam";
 
 export default function Home() {
   return (
     <div>
-      Karan Aggarwal
-      <Button>Hello World from Karan :)</Button>
-      <ModeToggle/>
+      <LightBeam />
+      <Hero />
     </div>
   );
 }
