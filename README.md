@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Get Git 🔥
+
+# How it Works
+
+Get Git is an interactive web application that allows users to explore, compare, and have fun with GitHub profiles. Try Getting roasted by AI 😈 Built with Next.js, React, and powered by various APIs including GitHub and Google's Gemini AI, this project offers a unique way to engage with GitHub data.
+
+![banner](https://placeholder.svg?height=300&width=600)
+
+## Features
+
+- **Profile Explorer**: View detailed GitHub user profiles, including repositories, commit history, and language statistics.
+- **Battle Mode**: Compare two GitHub users and see who comes out on top based on various metrics.
+- **AI-Powered Roasts**: Get humorous, AI-generated roasts of GitHub profiles using Google's Gemini AI.
+- **Data Visualization**: Interactive charts and graphs to visualize user statistics and activity.
+- **GitHub Timeline**: View a user's recent GitHub activity in a timeline format.
+
+## Technologies Used
+
+- [Next.js](https://nextjs.org/) - React framework for building the web application
+- [React](https://reactjs.org/) - JavaScript library for building user interfaces
+- [TypeScript](https://www.typescriptlang.org/) - Typed superset of JavaScript
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+- [shadcn/ui](https://ui.shadcn.com/) - Re-usable components built with Radix UI and Tailwind CSS
+- [Framer Motion](https://www.framer.com/motion/) - Animation library for React
+- [Recharts](https://recharts.org/) - Charting library built with React components
+- [GitHub API](https://docs.github.com/en/rest) - For fetching GitHub user and repository data
+- [Google Generative AI (Gemini)](https://ai.google.dev/) - For generating AI-powered roasts
+
+### Environment Variables
+
+| Variable              | Description                             |
+| :-------------------- | :-------------------------------------- |
+| `GITHUB_ACCESS_TOKEN` | Get this from github developer settings |
+| `GOOGLE_AI_API_KEY`   | Get from Google's Api                   |
 
 ## Getting Started
 
-First, run the development server:
+### Installation
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+To run this project locally, follow these steps:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1.  Clone the repository:
+    `git clone https://github.com/Karan-develops/Get-Git`
+2.  Install the dependencies:
+    `npm install`
+3.  Set up environment variables: - Create a `.env` file, - Add the Variables given in above Table.
+4.  Start the development server:
+    `npm run dev`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Usage
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Open your browser and navigate to `http://localhost:3000`.
+- Explore the features and functionalities of the Get Git.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+--- **_Enjoy_** **😊** ---
