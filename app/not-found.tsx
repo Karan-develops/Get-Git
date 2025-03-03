@@ -17,10 +17,11 @@ export default function NotFound(): JSX.Element {
         </div>
         <div className="regrets-and-console-text w-fit h-fit flex flex-col items-center justify-center gap-2">
           <div className="regret-text w-fit h-fit text-center text-wrap font-bold text-orange-800 text-2xl">
-            Sorry 😔, I couldn't find this page.
+            Sorry 😔, I couldn&apos;t find this page.
           </div>
           <div className="console-person w-fit h-fit text-center text-wrap text-orange-600 ">
-            But don't worry, you can find plenty of other things on my homepage.
+            But don&apos;t worry, you can find plenty of other things on my
+            homepage.
           </div>
         </div>
         <Link href={"/"} className="w-fit h-fit mt-4">

@@ -28,7 +28,7 @@ export default function RoastPage() {
         createdAt: userData.created_at,
         topLanguages: reposData
           .slice(0, 5)
-          .map((repo: any) => repo.language)
+          .map((repo: { language?: string | null }) => repo.language)
           .filter(Boolean),
       };
 
@@ -46,8 +46,9 @@ export default function RoastPage() {
 
       const data = await response.json();
       setRoast(data.roast);
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err) {
+      if (err instanceof Error) setError(err.message);
+      setError("Error fetching Roasting data. Please try again");
     } finally {
       setIsLoading(false);
     }
@@ -70,7 +71,7 @@ export default function RoastPage() {
             disabled={isLoading}
             className="hover:cursor-pointer"
           >
-            {isLoading ? "Roasting..." : "Roast 💀"}
+            {isLoading ? "Roasting..." : "Roast 😁"}
           </Button>
         </div>
         {error && <p className="text-red-500 mt-2">{error}</p>}

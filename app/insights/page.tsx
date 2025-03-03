@@ -23,7 +23,11 @@ import Link from "next/link";
 
 export default function InsightsPage() {
   const [username, setUsername] = useState("");
-  const [userData, setUserData] = useState<any>(null);
+  const [userData, setUserData] = useState<{
+    languageData: Record<string, number>;
+    commitActivityData: { name: string; commits: number }[];
+  } | null>(null);
+
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -37,15 +41,18 @@ export default function InsightsPage() {
 
       const { userData, reposData } = data.userData;
 
-      const languageData = reposData.reduce((acc: any, repo: any) => {
-        if (repo.language) {
-          acc[repo.language] = (acc[repo.language] || 0) + 1;
-        }
-        return acc;
-      }, {});
+      const languageData = reposData.reduce(
+        (acc: Record<string, number>, repo: { language: string }) => {
+          if (repo.language) {
+            acc[repo.language] = (acc[repo.language] || 0) + 1;
+          }
+          return acc;
+        },
+        {}
+      );
 
       const commitActivityData = await Promise.all(
-        reposData.slice(0, 5).map(async (repo: any) => {
+        reposData.slice(0, 5).map(async (repo: { name: string }) => {
           const commits = await fetchRepoCommits(username, repo.name);
           return {
             name:
@@ -59,8 +66,9 @@ export default function InsightsPage() {
       commitActivityData.sort((a, b) => b.commits - a.commits);
 
       setUserData({ ...userData, languageData, commitActivityData });
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err) {
+      if (err instanceof Error) setError(err.message);
+      setError("Error fetching user insights. Please try again");
     } finally {
       setIsLoading(false);
     }

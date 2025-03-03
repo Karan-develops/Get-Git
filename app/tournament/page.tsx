@@ -33,13 +33,15 @@ export default function TournamentPage() {
         userData.followers * 3 +
         userData.public_repos * 2 +
         reposData.reduce(
-          (sum: number, repo: any) => sum + repo.stargazers_count,
+          (sum: number, repo: { stargazers_count: number }) =>
+            sum + repo.stargazers_count,
           0
         );
       setParticipants([...participants, { username: newParticipant, score }]);
       setNewParticipant("");
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err) {
+      if (err instanceof Error) setError(err.message);
+      setError("Error Fetching user data. Please try again");
     } finally {
       setIsLoading(false);
     }

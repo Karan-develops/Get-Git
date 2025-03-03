@@ -10,6 +10,7 @@ import { Code, GithubIcon, Star, Trophy, Users } from "lucide-react";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import Link from "next/link";
+import { PlayerData } from "@/app/types/types";
 
 export function PlayerCard({
   playerData,

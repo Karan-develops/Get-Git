@@ -16,6 +16,7 @@ export async function GET(
 
     return NextResponse.json({ userData, events });
   } catch (error) {
+    console.log("Error fetching data:", error);
     return NextResponse.json(
       { error: "Failed to fetch data" },
       { status: 500 }

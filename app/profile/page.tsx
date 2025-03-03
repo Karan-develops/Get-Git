@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
+import { GitHubRepo, GitHubUser } from "../types/types";
 
 export default function ProfilePage() {
   const [username, setUsername] = useState("");
@@ -62,6 +63,7 @@ export default function ProfilePage() {
       setUserData(userData);
       setRepoData({ stars, forks });
     } catch (err) {
+      console.log(err);
       setError("Error fetching user data. Please try again.");
     } finally {
       setIsLoading(false);

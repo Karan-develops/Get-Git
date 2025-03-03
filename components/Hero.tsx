@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Github, Code, Star, Gitlab, Laugh } from "lucide-react";
+import { ArrowRight, Code, Star, Gitlab, Laugh } from "lucide-react";
 import { Button } from "./ui/button";
 import Link from "next/link";
 

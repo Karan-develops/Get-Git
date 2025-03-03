@@ -1,4 +1,4 @@
-interface GitHubUser {
+export interface GitHubUser {
   login: string;
   name: string;
   avatar_url: string;
@@ -10,12 +10,12 @@ interface GitHubUser {
   location: string;
 }
 
-interface GitHubRepo {
+export interface GitHubRepo {
   stargazers_count: number;
   forks_count: number;
 }
 
-interface PlayerData {
+export interface PlayerData {
   user: GitHubUser;
   score: number;
   stars: number;

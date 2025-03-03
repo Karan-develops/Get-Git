@@ -42,6 +42,7 @@ export default function BattlePage() {
     try {
       router.push(`/battle/results?player1=${player1}&player2=${player2}`);
     } catch (err) {
+      console.log(err);
       setError("An error occurred. Please try again.");
       setIsLoading(false);
     }
