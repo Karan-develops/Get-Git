@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { CircleSmall, Laugh, TrendingUp, Trophy } from "lucide-react";
+import { CircleSmall, Laugh, TrendingUp, Trophy, Trash2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -23,6 +23,13 @@ export default function TournamentPage() {
     setWinner(null);
     setIsLoading(true);
     setError("");
+
+    if (participants.some((p) => p.username === newParticipant)) {
+      setError("Participant already added!");
+      setIsLoading(false);
+      return;
+    }
+
     try {
       const response = await fetch(`/api/github/${newParticipant}`);
       if (!response.ok) throw new Error("Failed to fetch user data");
@@ -46,6 +53,14 @@ export default function TournamentPage() {
       setIsLoading(false);
     }
   };
+
+  const deleteParticipant = (username: string) => {
+    setParticipants(participants.filter((p) => p.username !== username));
+  };
+
+  const sortedParticipants = [...participants]
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 3);
 
   const startTournament = () => {
     if (participants.length < 2) {
@@ -88,6 +103,16 @@ export default function TournamentPage() {
           <Button onClick={addParticipant} disabled={isLoading}>
             {isLoading ? "Adding..." : "Add Participant"}
           </Button>
+          {winner && (
+            <Button
+              onClick={() => {
+                setWinner(null);
+                participants.length = 0;
+              }}
+            >
+              Reset Tournament
+            </Button>
+          )}
         </div>
         {error && <p className="text-red-500 mt-2">{error}</p>}
       </div>
@@ -99,7 +124,7 @@ export default function TournamentPage() {
           transition={{ duration: 0.5 }}
           className="flex justify-center"
         >
-          <Card className="w-[50vw] border border-blue-400">
+          <Card className="w-[50vw] border border-orange-400">
             <CardHeader>
               <CardTitle className="flex gap-2">
                 {participants.length} - Participants
@@ -109,9 +134,17 @@ export default function TournamentPage() {
             <CardContent>
               <ul>
                 {participants.map((participant, index) => (
-                  <li key={index} className="mb-2 flex gap-1">
+                  <li key={index} className="mb-2 flex items-center gap-2">
                     <CircleSmall className="fill-current size-5" />
                     {participant.username}
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      onClick={() => deleteParticipant(participant.username)}
+                      className="hover:cursor-pointer"
+                    >
+                      <Trash2 className="text-red-500 size-4" />
+                    </Button>
                   </li>
                 ))}
               </ul>
@@ -128,7 +161,7 @@ export default function TournamentPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-8 flex justify-center"
+          className="mt-8 flex justify-center gap-2"
         >
           <Card className="border border-amber-400">
             <CardHeader>
@@ -140,6 +173,23 @@ export default function TournamentPage() {
             <CardContent>
               <p className="text-xl font-bold">{winner.username}</p>
               <p>Final Score: {winner.score}</p>
+            </CardContent>
+          </Card>
+          <Card className="border border-green-400">
+            <CardHeader>
+              <CardTitle>🏆 Top 3 Participants</CardTitle>
+            </CardHeader>
+            <CardContent>
+              {sortedParticipants.map((p, i) => (
+                <p
+                  key={i}
+                  className={`text-lg ${
+                    i === 0 ? "font-bold text-yellow-500" : ""
+                  }`}
+                >
+                  {i + 1}. {p.username} - {p.score}
+                </p>
+              ))}
             </CardContent>
           </Card>
         </motion.div>
