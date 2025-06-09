@@ -95,7 +95,7 @@ export default function InsightsPage() {
       </div>
 
       {isLoading ? (
-        <SiteLoader />
+        <SiteLoader content="Fetching Insights..." />
       ) : (
         userData && (
           <motion.div

@@ -1,10 +1,10 @@
 import React from "react";
 
-const SiteLoader = () => {
+const SiteLoader = ({content}:{content:string}) => {
   return (
     <div>
       <div className="flex justify-center animate-pulse text-3xl">
-        Loading your content...
+        {content}
       </div>
     </div>
   );

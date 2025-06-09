@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { fetchGitHubData } from "@/lib/github-api";
+import SiteLoader from "@/components/SiteLoader";
 
 export default function RoastPage() {
   const [username, setUsername] = useState("");
@@ -77,24 +78,28 @@ export default function RoastPage() {
         {error && <p className="text-red-500 mt-2">{error}</p>}
       </div>
 
-      {roast && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <Card className="max-w-4xl mx-auto">
-            <CardHeader>
-              <CardTitle className="flex justify-center items-center gap-2">
-                <Flame className="text-orange-500" />
-                Roast Result 😂💀
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-lg whitespace-pre-wrap">{roast}</p>
-            </CardContent>
-          </Card>
-        </motion.div>
+      {isLoading ? (
+        <SiteLoader content="Generating Roast 😁" />
+      ) : (
+        roast && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <Card className="max-w-4xl mx-auto">
+              <CardHeader>
+                <CardTitle className="flex justify-center items-center gap-2">
+                  <Flame className="text-orange-500" />
+                  Roast Result 😂💀
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-lg whitespace-pre-wrap">{roast}</p>
+              </CardContent>
+            </Card>
+          </motion.div>
+        )
       )}
     </div>
   );

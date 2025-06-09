@@ -24,6 +24,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { GitHubRepo, GitHubUser } from "../types/types";
+import SiteLoader from "@/components/SiteLoader";
 
 export default function ProfilePage() {
   const [username, setUsername] = useState("");
@@ -90,83 +91,87 @@ export default function ProfilePage() {
         {error && <p className="text-red-500 mt-2">{error}</p>}
       </div>
 
-      {userData && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <Card className="max-w-2xl mx-auto border border-blue-600">
-            <CardHeader>
-              <div className="flex items-center gap-4">
-                <Image
-                  src={userData.avatar_url || ""}
-                  alt={`${userData.name}'s avatar`}
-                  width={80}
-                  height={80}
-                  className="rounded-full"
-                />
-                <div className="flex flex-col gap-2">
-                  <CardTitle>{userData.name}</CardTitle>
-                  <CardDescription>@{userData.login}</CardDescription>
-                  <CardDescription className="flex gap-1">
-                    <MapPinHouse className="size-4" />
-                    {userData.location || "Earth"}
-                  </CardDescription>
+      {isLoading ? (
+        <SiteLoader content="Fetching GitHub Profile..." />
+      ) : (
+        userData && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <Card className="max-w-2xl mx-auto border border-blue-600">
+              <CardHeader>
+                <div className="flex items-center gap-4">
+                  <Image
+                    src={userData.avatar_url || ""}
+                    alt={`${userData.name}'s avatar`}
+                    width={80}
+                    height={80}
+                    className="rounded-full"
+                  />
+                  <div className="flex flex-col gap-2">
+                    <CardTitle>{userData.name}</CardTitle>
+                    <CardDescription>@{userData.login}</CardDescription>
+                    <CardDescription className="flex gap-1">
+                      <MapPinHouse className="size-4" />
+                      {userData.location || "Earth"}
+                    </CardDescription>
+                  </div>
                 </div>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground mb-4">
-                {userData.bio || "No Bio."}
-              </p>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="flex items-center gap-2">
-                  <Users className="text-primary" />
-                  <span>{userData.followers} followers</span>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground mb-4">
+                  {userData.bio || "No Bio."}
+                </p>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="flex items-center gap-2">
+                    <Users className="text-primary" />
+                    <span>{userData.followers} followers</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Users className="text-primary" />
+                    <span>{userData.following} following</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Code className="text-primary" />
+                    <span>{userData.public_repos} repositories</span>
+                  </div>
+                  {repoData && (
+                    <>
+                      <div className="flex items-center gap-2">
+                        <Star className="text-primary" />
+                        <span>{repoData.stars} stars</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <GitFork className="text-primary" />
+                        <span>{repoData.forks} forks</span>
+                      </div>
+                    </>
+                  )}
                 </div>
-                <div className="flex items-center gap-2">
-                  <Users className="text-primary" />
-                  <span>{userData.following} following</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Code className="text-primary" />
-                  <span>{userData.public_repos} repositories</span>
-                </div>
-                {repoData && (
-                  <>
-                    <div className="flex items-center gap-2">
-                      <Star className="text-primary" />
-                      <span>{repoData.stars} stars</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <GitFork className="text-primary" />
-                      <span>{repoData.forks} forks</span>
-                    </div>
-                  </>
-                )}
-              </div>
-            </CardContent>
-            <CardFooter>
-              <Button asChild variant="outline" className="w-full">
-                <Link
-                  href={userData.html_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <GithubIcon className="h-4 w-4" />
-                  View GitHub Profile
+              </CardContent>
+              <CardFooter>
+                <Button asChild variant="outline" className="w-full">
+                  <Link
+                    href={userData.html_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <GithubIcon className="h-4 w-4" />
+                    View GitHub Profile
+                  </Link>
+                </Button>
+              </CardFooter>
+              <Button variant={"outline"} className="w-auto mx-6">
+                <Link href={"/insights"} className="flex gap-2">
+                  <Braces className="mt-0.5 h-4 w-4" />
+                  See More Insights
                 </Link>
               </Button>
-            </CardFooter>
-            <Button variant={"outline"} className="w-auto mx-6">
-              <Link href={"/insights"} className="flex gap-2">
-                <Braces className="mt-0.5 h-4 w-4" />
-                See More Insights
-              </Link>
-            </Button>
-          </Card>
-        </motion.div>
+            </Card>
+          </motion.div>
+        )
       )}
     </div>
   );

@@ -6,7 +6,7 @@ import SiteLoader from "@/components/SiteLoader";
 
 export default function ResultsPage() {
   return (
-    <Suspense fallback={<SiteLoader />}>
+    <Suspense fallback={<SiteLoader content="Loading your Data..." />}>
       <Results />
     </Suspense>
   );
